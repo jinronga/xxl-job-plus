@@ -11,6 +11,7 @@
 	<url>https://www.xuxueli.com/</url>
 
 	<modules>
+		<module>system</module>
 		<module>xxl-job-core</module>
 		<module>xxl-job-admin</module>
 		<module>xxl-job-executor-samples</module>
@@ -42,6 +43,11 @@
 		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
 		<maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
 		<maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+
+                  <!--		-->
+		 <mybatis-plus-version>3.5.2</mybatis-plus-version>
+		 <lombok-version>1.18.22</lombok-version>
+
 	</properties>
 
 	<build>

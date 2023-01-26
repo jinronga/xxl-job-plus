@@ -1,0 +1,2 @@
+cn.jinronga.common.security.config.JinRongaWebSecurityConfigurerAdapter
+cn.jinronga.common.security.config.JinRongaSecurityAutoConfiguration

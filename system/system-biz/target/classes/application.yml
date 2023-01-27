@@ -1,0 +1,30 @@
+server:
+  port: 8082
+
+
+spring:
+  datasource:
+    username: root
+    password: 1460595002
+    url: jdbc:mysql://1.15.242.101:3306/xxl_job_plus?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: system-biz
+
+mybatis-plus:
+  info:
+    base-package:  cn.jinronga.systembiz.**.mapper
+
+jinronga:
+  web:
+    admin-ui:
+      url: xxx
+    admin-api:
+      controller: xxxx
+
+
+
+token:
+  refresh:
+    time: 3
+  token-url: http://localhost:8082

@@ -39,6 +39,9 @@
             <version>${mybatis-plus.version}</version>
         </dependency>
 
+
+
+
         <dependency>
             <groupId>cn.jinronga</groupId>
             <artifactId>common-model</artifactId>

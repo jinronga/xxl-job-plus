@@ -1,16 +1,23 @@
 package com.xxl.job.admin.controller;
 
+import cn.jinronga.common.model.pojo.R;
+import cn.jinronga.common.mybatis.basic.GenericDTO;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xxl.job.admin.core.model.XxlJobGroup;
 import com.xxl.job.admin.core.model.XxlJobRegistry;
 import com.xxl.job.admin.core.util.I18nUtil;
 import com.xxl.job.admin.mapper.XxlJobGroupMapper;
 import com.xxl.job.admin.mapper.XxlJobInfoMapper;
 import com.xxl.job.admin.mapper.XxlJobRegistryMapper;
+import com.xxl.job.admin.object.dto.JobGroupPageDTO;
+import com.xxl.job.admin.service.XxlJobGroupService;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.enums.RegistryConfig;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +32,7 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("/jobgroup")
+@RequiredArgsConstructor
 public class JobGroupController {
 
 	@Resource
@@ -34,6 +42,8 @@ public class JobGroupController {
 	@Resource
 	private XxlJobRegistryMapper xxlJobRegistryMapper;
 
+	private final XxlJobGroupService xxlJobGroupService;
+
 	@RequestMapping
 	public String index(Model model) {
 		return "jobgroup/jobgroup.index";
@@ -41,21 +51,8 @@ public class JobGroupController {
 
 	@RequestMapping("/pageList")
 	@ResponseBody
-	public Map<String, Object> pageList(HttpServletRequest request,
-										@RequestParam(required = false, defaultValue = "0") int start,
-										@RequestParam(required = false, defaultValue = "10") int length,
-										String appname, String title) {
-
-		// page query
-		List<XxlJobGroup> list = xxlJobGroupMapper.pageList(start, length, appname, title);
-		int list_count = xxlJobGroupMapper.pageListCount(start, length, appname, title);
-
-		// package result
-		Map<String, Object> maps = new HashMap<String, Object>();
-		maps.put("recordsTotal", list_count);		// 总记录数
-		maps.put("recordsFiltered", list_count);	// 过滤后的总记录数
-		maps.put("data", list);  					// 分页列表
-		return maps;
+	public R<Page<XxlJobGroup>> pageList(@RequestBody GenericDTO<JobGroupPageDTO> groupPageDTOGenericDTO) {
+		return R.success(xxlJobGroupService.pageList(groupPageDTOGenericDTO))	;
 	}
 
 	@RequestMapping("/save")
